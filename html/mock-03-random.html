@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mock-Random</title>
+</head>
+<body>
+</body>
+<script src="./../js/mock.js"></script>
+<script src="./../js/jquery-1.12.4.js"></script>
+<script>
+    // Mock.Random 是一个工具类，用于生成各种随机数据
+    //Mock.Random 的方法在数据模板中称为『占位符』，书写格式为 @占位符(参数 [, 参数])
+    var Random = Mock.Random
+    //1    
+    Random.email()
+    //2
+    Mock.mock('@email')
+    //3
+    Mock.mock( { email: '@email' } )
+
+    //为Random拓展方法
+    Random.extend({
+        constellation: function(date) {
+            var constellations = ['白羊座', '金牛座', '双子座', '巨蟹座', '狮子座', '处女座', '天秤座', '天蝎座', '射手座', '摩羯座', '水瓶座', '双鱼座']
+            return this.pick(constellations)
+        }
+    })
+    Random.constellation()
+    Mock.mock('@CONSTELLATION')
+    var data = Mock.mock({
+        constellation: '@CONSTELLATION'
+    })
+
+    $('<pre>').text(JSON.stringify(data, null, 4)).appendTo('body')
+</script>
+</html>

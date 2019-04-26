@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mock-setup</title>
+</head>
+<body>
+</body>
+<script src="./../js/mock.js"></script>
+<script src="./../js/jquery-1.12.4.js"></script>
+<script>
+    // Mock.mock( template )
+    // 根据数据模板生成模拟数据
+    var data = Mock.mock({
+        //生成1-10项的人员信息
+        'list|1-10': [{
+            'id|+1': 1,             //id递增
+            'name': '@name',
+            'email': '@email',
+            'birthday': '@date'
+        }]
+    })
+
+    // Mock.setup( settings )
+    // 配置拦截 Ajax 请求时的行为
+    Mock.setup({
+        timeout: 5000
+        // timeout: '200-5000'
+    })
+
+    //每一个层级比上一个多2个空格
+    $('<pre>').text(JSON.stringify(data, null, 4)).appendTo('body')
+</script>
+</html>

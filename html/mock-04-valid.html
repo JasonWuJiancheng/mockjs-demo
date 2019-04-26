@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mock-valid</title>
+</head>
+<body>
+</body>
+<script src="./../js/mock.js"></script>
+<script src="./../js/jquery-1.12.4.js"></script>
+<script>
+    // Mock.valid( template, data )
+    // 校验真实数据 data 是否与数据模板 template 匹配
+    var template = {
+        name: 'yyyy-MM-dd'
+    }
+    var data = {
+        name: 'yy-MM-dd'
+    }
+    var mes = Mock.valid(template, data)
+
+    $('<pre>').text(JSON.stringify(mes, null, 4)).appendTo('body')
+
+    /*
+        mes =>
+        [
+            {
+                "path": [
+                    "ROOT",
+                    "name"
+                ],
+                "type": "value",
+                "actual": "value2",
+                "expected": "value1",
+                "action": "is equal to",
+                "message": "[VALUE] Expect ROOT.name'value is equal to value1, but is value2"
+            }
+        ]
+    */
+</script>
+</html>

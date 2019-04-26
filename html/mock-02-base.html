@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mock-base</title>
+</head>
+<body>
+</body>
+<script src="./../js/mock.js"></script>
+<script src="./../js/jquery-1.12.4.js"></script>
+<script>
+    // Mock.mock( rurl, template )
+    // 记录数据模板。当拦截到匹配 rurl 的 Ajax 请求时，将根据数据模板 template 生成模拟数据，并作为响应数据返回
+    Mock.mock('/hello', {
+        //生成1-10项的人员信息
+        'list|1-10': [{
+            'id|+1': 1,             //id递增
+            'name': '@first @last',
+            'email': '@email',
+            'birthday': '@date'
+        }]
+    })
+
+    //利用jquery去ajax请求模拟接口/hello
+    $.ajax({
+        url:"/hello",
+        dataType: 'json',
+        success:function(data){
+            $('<pre>').text(JSON.stringify(data, null, 4))
+            .appendTo('body')
+        }
+    });
+</script>
+</html>

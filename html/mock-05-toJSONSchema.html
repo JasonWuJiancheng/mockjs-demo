@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mock-toJSONSchema</title>
+</head>
+<body>
+</body>
+<script src="./../js/mock.js"></script>
+<script src="./../js/jquery-1.12.4.js"></script>
+<script>
+    // Mock.toJSONSchema( template )
+    // 把 Mock.js 风格的数据模板 template 转换成 JSON Schema
+    var template = {
+        'key|1-10': '★'
+    }
+    var data = Mock.toJSONSchema(template)
+
+    $('<pre>').text(JSON.stringify(data, null, 4)).appendTo('body')
+
+    /*
+        data =>
+        {
+            "template": {
+                "key|1-10": "★"
+            },
+            "type": "object",
+            "rule": {},
+            "path": [
+                "ROOT"
+            ],
+            "properties": [
+                {
+                    "name": "key",
+                    "template": "★",
+                    "type": "string",
+                    "rule": {
+                        "parameters": [
+                            "key|1-10",
+                            "key",
+                            null,
+                            "1-10",
+                            null
+                        ],
+                        "range": [
+                            "1-10",
+                            "1",
+                            "10"
+                        ],
+                        "min": 1,
+                        "max": 10,
+                        "count": 8
+                    },
+                    "path": [
+                        "ROOT",
+                        "key"
+                    ]
+                }
+            ]
+        }
+    */
+</script>
+</html>
